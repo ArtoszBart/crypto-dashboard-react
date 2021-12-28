@@ -1,8 +1,13 @@
 import React from 'react';
+import NewsFeed from './components/NewsFeed';
+import CurrencyConverter from './components/CurrencyConverter';
 
 function App() {
   return (
-    <h1>Hello world!</h1>
+    <div className='app'>
+      <CurrencyConverter />
+      <NewsFeed />
+    </div>
   );
 }
 
