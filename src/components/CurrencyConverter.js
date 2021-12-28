@@ -1,17 +1,36 @@
 import { useState } from 'react'
 import ExchangeRate from './ExchangeRate'
+import axios from 'axios';
 
 function CurrencyConverter() {
 	const currencies = ['BTC', 'ETH', 'USD', 'XRP', 'LTC', 'ADA'];
 	const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('BTC');
 	const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('BTC');
 	const [amount, setAmount] = useState(1);
+	const [exchangeRate, setExchangeRate] = useState(0);
+	const [result, setResult] = useState(0);
 
 	const convert = () => {
+		const options = {
+			method: 'GET',
+			url: 'https://alpha-vantage.p.rapidapi.com/query',
+			params: { from_currency: chosenPrimaryCurrency, function: 'CURRENCY_EXCHANGE_RATE', to_currency: chosenSecondaryCurrency },
+			headers: {
+				'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+				'x-rapidapi-key': process.env.REACT_APP_RAPID_API_KEY
+			}
+		};
 
+		axios.request(options).then(function (response) {
+			console.log(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+			setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+			setResult(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'] * amount);
+		}).catch(function (error) {
+			console.error(error);
+		});
 	};
 
-	console.log(amount);
+	console.log(exchangeRate);
 	return (
 		<div className="currency-converter">
 			<h2>CurrencyConverter</h2>
@@ -33,7 +52,7 @@ function CurrencyConverter() {
 						<tr>
 							<td>Secondary Currency:</td>
 							<td>
-								<input type="number" name="currency-amount-2" value={""} />
+								<input type="number" name="currency-amount-2" value={result} disabled={true} />
 							</td>
 							<td>
 								<select name="currency-option-2" className="currency-option" value={chosenSecondaryCurrency} onChange={(e) => setChosenSecondaryCurrency(e.target.value)}>
@@ -46,7 +65,11 @@ function CurrencyConverter() {
 
 				<button id="convert-button" onClick={convert}>Convert</button>
 			</div>
-			<ExchangeRate />
+			<ExchangeRate
+				exchangeRate={exchangeRate}
+				chosenPrimaryCurrency={chosenPrimaryCurrency}
+				chosenSecondaryCurrency={chosenSecondaryCurrency}
+			/>
 		</div>
 	);
 }
