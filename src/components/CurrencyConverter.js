@@ -7,8 +7,17 @@ function CurrencyConverter() {
 	const [chosenPrimaryCurrency, setChosenPrimaryCurrency] = useState('BTC');
 	const [chosenSecondaryCurrency, setChosenSecondaryCurrency] = useState('BTC');
 	const [amount, setAmount] = useState(1);
-	const [exchangeRate, setExchangeRate] = useState(0);
+	// const [exchangeRate, setExchangeRate] = useState(0);
+	// const [primaryCurrencyExchanged, setPrimaryCurrencyExchanged] = useState('BTC');
+	// const [secondaryCurrencyExchanged, setSecondaryCurrencyExchanged] = useState('BTC');
+
+	const [exchangedData, setExchangedData] = useState({
+		primaryCurrency: 'BTC',
+		secondaryCurrency: 'BTC',
+		exchangeRate: 1
+	});
 	const [result, setResult] = useState(0);
+
 
 	const convert = () => {
 		const options = {
@@ -23,14 +32,20 @@ function CurrencyConverter() {
 
 		axios.request(options).then(function (response) {
 			console.log(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
-			setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
+			// setExchangeRate(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']);
 			setResult(response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'] * amount);
+			// setPrimaryCurrencyExchanged(chosenPrimaryCurrency);
+			// setSecondaryCurrencyExchanged(chosenSecondaryCurrency);
+			setExchangedData({
+				primaryCurrency: chosenPrimaryCurrency,
+				secondaryCurrency: chosenSecondaryCurrency,
+				exchangeRate: response.data['Realtime Currency Exchange Rate']['5. Exchange Rate']
+			});
 		}).catch(function (error) {
 			console.error(error);
 		});
 	};
 
-	console.log(exchangeRate);
 	return (
 		<div className="currency-converter">
 			<h2>CurrencyConverter</h2>
@@ -66,9 +81,7 @@ function CurrencyConverter() {
 				<button id="convert-button" onClick={convert}>Convert</button>
 			</div>
 			<ExchangeRate
-				exchangeRate={exchangeRate}
-				chosenPrimaryCurrency={chosenPrimaryCurrency}
-				chosenSecondaryCurrency={chosenSecondaryCurrency}
+				exchangedData={exchangedData}
 			/>
 		</div>
 	);
