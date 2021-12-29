@@ -1,28 +1,83 @@
+@import 'config';
+
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-family: $mainFont;
 	-webkit-font-smooting: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	font-family: $codeFont;
 }
 
 .app {
 	display: flex;
-	// flex-direction: column;
+	flex-direction: column;
 	align-items: center;
 
+	&-wrapper {
+		display: flex;
+	}
+
 	.news-feed {
-		background-color: red;
+		background-color: $newsFeedColor;
+		padding: 10px;
+		margin: 5px;
+		box-shadow: $shadow;
+		max-width: 300px;
 	}
 	
 	.currency-converter {
-		background-color: blue;
+		background-color: $currencyConverterColor;
+		padding: 10px;
+		margin: 5px;
+		box-shadow: $shadow;
+		text-align: center;
 		
-		.exchange-rate {
-			background-color: green;
+		.input-box {
+			background-color: $inputBoxColor;
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: $shadow;
+
+			input, select {
+				border: none;
+				border-radius: 3px;
+			}
+
+			select {
+				cursor: pointer;
+			}
+
+			button {
+				border: none;
+				float: right;
+				margin: 2px;
+				cursor: pointer;
+				background-color: #fff;
+				border-radius: 3px;
+				
+				&:hover {
+					background-color: coral;
+					color: #fff;
+					text-shadow: 0 1px 2px #000;
+				}
+			}
 		}
+
+		.exchange-rate {
+			background-color: $exchangeRate;
+			padding: 20px;
+			margin-top: 10px;
+			border-radius: 10px;
+			box-shadow: $shadow;
+
+			&-value {
+				font-size: 2em;
+				font-weight: bold;
+			}
+		}
+
 	}
 }

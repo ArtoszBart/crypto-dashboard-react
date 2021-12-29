@@ -1,32 +1,94 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smooting: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .app {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
+.app-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .app .news-feed {
-  background-color: red;
+  background-color: #cccce7;
+  padding: 10px;
+  margin: 5px;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
 }
 
 .app .currency-converter {
-  background-color: blue;
+  background-color: #e6dfd3;
+  padding: 10px;
+  margin: 5px;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.app .currency-converter .input-box {
+  background-color: #dae3ee;
+  padding: 30px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.app .currency-converter .input-box input, .app .currency-converter .input-box select {
+  border: none;
+  border-radius: 3px;
+}
+
+.app .currency-converter .input-box select {
+  cursor: pointer;
+}
+
+.app .currency-converter .input-box button {
+  border: none;
+  float: right;
+  margin: 2px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.app .currency-converter .input-box button:hover {
+  background-color: coral;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
 }
 
 .app .currency-converter .exchange-rate {
-  background-color: green;
+  background-color: #dde6dd;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.app .currency-converter .exchange-rate-value {
+  font-size: 2em;
+  font-weight: bold;
 }
 /*# sourceMappingURL=main.css.map */
